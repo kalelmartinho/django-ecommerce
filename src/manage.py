@@ -2,7 +2,7 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
-from src.django_ecommerce.settings import base
+from django_ecommerce.settings import base
 
 def main():
     """Run administrative tasks."""
