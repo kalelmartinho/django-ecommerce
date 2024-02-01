@@ -39,6 +39,8 @@ Source = "https://github.com/unknown/django-ecommerce"
 
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "src.django_ecommerce.settings.local"
+python_files = "test_*.py"
+pythonpath = "."
 
 [tool.hatch.version]
 path = "src/django_ecommerce/__about__.py"
@@ -49,6 +51,8 @@ dependencies = [
   "pytest",
 ]
 [tool.hatch.envs.default.scripts]
+lint = "ruff . && ruff check --select I . && ruff format . --check"
+format = "ruff . --fix && ruff format . && ruff check --select I . --fix"
 test = "pytest {args:tests}"
 test-cov = "coverage run -m pytest {args:tests}"
 cov-report = [
