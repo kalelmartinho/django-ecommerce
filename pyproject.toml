@@ -24,7 +24,13 @@ classifiers = [
   "Programming Language :: Python :: Implementation :: CPython",
   "Programming Language :: Python :: Implementation :: PyPy",
 ]
-dependencies = ["Django>=5.0"]
+dependencies = [
+    "Django>=5.0",
+    "djangorestframework>=3.14",
+    "sqlparse>=0.4.4",
+    "asgiref>=3.7.2",
+    "pytz>=2023.4",
+]
 
 [project.urls]
 Documentation = "https://github.com/unknown/django-ecommerce#readme"
