@@ -37,6 +37,9 @@ Documentation = "https://github.com/unknown/django-ecommerce#readme"
 Issues = "https://github.com/unknown/django-ecommerce/issues"
 Source = "https://github.com/unknown/django-ecommerce"
 
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "src.django_ecommerce.settings.local"
+
 [tool.hatch.version]
 path = "src/django_ecommerce/__about__.py"
 
