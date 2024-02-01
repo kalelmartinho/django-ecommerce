@@ -38,6 +38,7 @@ class GeneralSettings(BaseSettings):
         # Third party apps
         "rest_framework",
         # Local apps
+        "django_ecommerce.product",
     ]
 
     MIDDLEWARE: List[str] = [
