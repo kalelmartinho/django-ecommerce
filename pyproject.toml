@@ -38,7 +38,7 @@ Issues = "https://github.com/unknown/django-ecommerce/issues"
 Source = "https://github.com/unknown/django-ecommerce"
 
 [tool.pytest.ini_options]
-DJANGO_SETTINGS_MODULE = "src.django_ecommerce.settings.local"
+DJANGO_SETTINGS_MODULE = "src.django_ecommerce.settings.base"
 python_files = "test_*.py"
 pythonpath = "."
 
