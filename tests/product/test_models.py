@@ -13,4 +13,6 @@ class TestCategoryModel:
         assert str(category) == category.name
 
 class TestProductModel:
-    pass
+    def test_str_method(self, product_factory):
+        product = product_factory()
+        assert str(product) == product.name
