@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 from typing import Dict, List, Optional
-
+import importlib.metadata
 from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from pydjantic import to_django
@@ -37,6 +37,7 @@ class GeneralSettings(BaseSettings):
         "django.contrib.staticfiles",
         # Third party apps
         "rest_framework",
+        "drf_spectacular",
         # Local apps
         "django_ecommerce.product",
     ]
@@ -66,7 +67,18 @@ class GeneralSettings(BaseSettings):
         },
     ]
     DEFAULT_AUTO_FIELD: str = "django.db.models.BigAutoField"
-    REST_FRAMEWORK: Dict = {}
+
+
+class RestFrameworkSettings(BaseSettings):
+    REST_FRAMEWORK: Dict = {
+        "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+    }
+
+    SPECTACULAR_SETTINGS: Dict = {
+        "TITLE": "Django Ecommerce",
+        "DESCRIPTION": "API for Django Ecommerce",
+        "VERSION": importlib.metadata.version("django_ecommerce"),
+    }
 
 
 class I18NSettings(BaseSettings):
@@ -97,7 +109,7 @@ class StaticSettings(BaseSettings):
     ]
 
 
-class ProjectSettings(GeneralSettings, I18NSettings, StaticSettings):
+class ProjectSettings(GeneralSettings, I18NSettings, StaticSettings, RestFrameworkSettings):
     model_config = SettingsConfigDict(env_file=".env")
 
 
