@@ -3,4 +3,4 @@ from django.apps import AppConfig
 
 class ProductConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'django_ecommerce.product'
+    name = 'src.django_ecommerce.product'
