@@ -3,12 +3,14 @@ import pytest
 pytestmark = pytest.mark.django_db 
 
 class TestBrandModel:
-    def test_output_str_method(self, brand_factory):
+    def test_str_method(self, brand_factory):
         brand = brand_factory()
         assert str(brand) == brand.name 
 
 class TestCategoryModel:
-    pass
+    def test_str_method(self, category_factory):
+        category = category_factory()
+        assert str(category) == category.name
 
 class TestProductModel:
     pass
