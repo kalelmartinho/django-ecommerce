@@ -1,3 +1,5 @@
+from typing import Optional, List
+
 from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework.response import Response
@@ -41,16 +43,23 @@ class ProductViewSet(viewsets.ViewSet):
     """
 
     queryset = Product.objects.all()  # type: ignore
+    serializer_class = ProductSerializer
 
-    @extend_schema(responses=ProductSerializer)
     def list(self, request: Request, *args, **kwargs) -> Response:
         """
         List all products.
         """
         serializer = ProductSerializer(self.queryset, many=True)
         return Response(serializer.data)
+
+    def retrieve(self, request: Request, pk: Optional[int] = None) -> Response:
+        """
+        Retrieve a product.
+        """
+        product = Product.objects.get(pk=pk)
+        serializer = ProductSerializer(product)
+        return Response(serializer.data)
     
-    @extend_schema(responses=ProductSerializer)
     @action(
         detail=False,
         methods=["get"],
