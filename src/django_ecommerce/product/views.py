@@ -32,7 +32,7 @@ class BrandViewSet(viewsets.ViewSet):
     queryset = Brand.objects.all()  # type: ignore
 
     @extend_schema(responses=BrandSerializer)
-    def list(self, request: Request, *args, **kwargs) -> Response:
+    def list(self, request: Request) -> Response:
         serializer = BrandSerializer(self.queryset, many=True)
         return Response(serializer.data)
 
@@ -44,22 +44,23 @@ class ProductViewSet(viewsets.ViewSet):
 
     queryset = Product.objects.all()  # type: ignore
     serializer_class = ProductSerializer
+    lookup_field = "slug"
 
-    def list(self, request: Request, *args, **kwargs) -> Response:
+    def list(self, request: Request) -> Response:
         """
         List all products.
         """
         serializer = ProductSerializer(self.queryset, many=True)
         return Response(serializer.data)
 
-    def retrieve(self, request: Request, pk: Optional[int] = None) -> Response:
+    def retrieve(self, request: Request, slug: Optional[str] = None) -> Response:
         """
         Retrieve a product.
         """
-        product = Product.objects.get(pk=pk)
-        serializer = ProductSerializer(product)
+        queryset = self.queryset.filter(slug=slug)
+        serializer = ProductSerializer(queryset, many=True)
         return Response(serializer.data)
-    
+
     @action(
         detail=False,
         methods=["get"],
